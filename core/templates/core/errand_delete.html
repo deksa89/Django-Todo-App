@@ -1,0 +1,10 @@
+<h1>Delete errand</h1>
+
+<a href="{% url 'errands' %}">Go back</a>
+
+<p>You are going to delete: {{errand.title}}</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Submit" />
+</form>
