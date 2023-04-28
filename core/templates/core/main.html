@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Todo Django</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: rgb(202, 197, 197);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 5rem auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+  
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-bottom: 1px solid #ccc;
+        }
+        
+        .greetings {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0;
+            color: #007bff;
+            text-shadow: 1px 1px #f5f5f5;
+            text-transform: capitalize;
+        }
+        
+        h3 {
+            margin: 0;
+        }
+        
+        .create-task {
+            display: block;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 2px 2px #ccc;
+            transition: all 0.3s ease;
+        }
+        
+        .create-task:hover {
+            background-color: #0062cc;
+            box-shadow: 3px 3px #ccc;
+        }
+        
+        p {
+            margin: 20px 0;
+            font-size: 18px;
+        }
+        
+        .tasks-table {
+            margin: 20px 0;
+        }
+        
+        .task {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            box-shadow: 2px 2px #ccc;
+            transition: all 0.3s ease;
+        }
+        
+        .task:hover {
+            background-color: #ebebeb;
+            box-shadow: 3px 3px #ccc;
+        }
+        
+        .task-title {
+            margin: 0;
+            color: #007bff;
+            text-shadow: 1px 1px #f5f5f5;
+        }
+        
+        .link-buttons a {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 2px 2px #ccc;
+            transition: all 0.3s ease;
+        }
+        
+        .link-buttons a:hover {
+            background-color: #0062cc;
+            box-shadow: 3px 3px #ccc;
+        }
+
+        .detail-headline {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .go-back-btn {
+            display: inline-block;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .go-back-btn:hover {
+            text-decoration: underline;
+        }
+        
+        p {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .creator-name {
+            font-weight: bold;
+        }
+        
+        .date-created {
+            font-style: italic;
+        }
+        
+        .is-completed {
+            font-weight: bold;
+        }
+  
+        .create-headline {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .go-back-create {
+            display: inline-block;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .go-back-create:hover {
+            text-decoration: underline;
+        }
+        
+        .create-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .create-form label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .create-form input[type="text"],
+        .create-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .create-form input[type="submit"] {
+            display: block;
+            margin: 0 auto;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .create-form input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .delete-headline {
+            font-size: 2em;
+            margin-top: 1em;
+          }
+          
+          .go-back-delete {
+            color: blue;
+            text-decoration: none;
+            margin-bottom: 1em;
+            display: block;
+          }
+          
+          .delete-message {
+            border: 1px solid red;
+            padding: 1em;
+            margin-bottom: 1em;
+          }
+          
+          .delete-title {
+            font-weight: bold;
+          }
+          
+          .delete-warning {
+            color: red;
+          }
+          
+          .delete-form {
+            display: inline-block;
+          }
+          
+          .delete-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 0.5em 1em;
+            border-radius: 4px;
+            cursor: pointer;
+          }
+          
+          .delete-btn:hover {
+            background-color: maroon;
+          }
+
+          .login-headline {
+            font-size: 2em;
+            text-align: center;
+        }
+    
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 2em 0;
+        }
+    
+        .login-form input[type="text"],
+        .login-form input[type="password"] {
+            width: 100%;
+            padding: 0.5em;
+            margin: 0.5em 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1.2em;
+        }
+    
+        .login-form input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            padding: 0.5em;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+    
+        .login-to-register {
+            text-align: center;
+            margin-top: 1em;
+        }
+    
+        .login-to-register a {
+            color: #007bff;
+            text-decoration: none;
+        }
+    
+        .login-to-register a:hover {
+            text-decoration: underline;
+        }
+
+        .register-headline {
+            font-size: 2rem;
+            text-align: center;
+        }
+        
+        .register-form {
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        max-width: 400px;
+        }
+        
+        .register-form input[type="text"],
+        .register-form input[type="password"],
+        .register-form input[type="email"] {
+        display: block;
+        width: 93.5%;
+        padding: 0.75rem;
+        border: 1px solid #ccc;
+        margin-bottom: 1rem;
+        }
+        
+        .register-btn {
+        background-color: #007bff;
+        color: white;
+        padding: 0.5em;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.2em;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+        }
+        
+        .register-btn:hover {
+        background-color: #0069d9;
+        }
+        
+        .register-to-login {
+        margin-top: 1rem;
+        text-align: center;
+        }
+        
+        .register-to-login a {
+        color: #007bff;
+        text-decoration: none;
+        }
+        
+        .register-to-login a:hover {
+        text-decoration: underline;
+        }
+  
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+</body>
+</html>

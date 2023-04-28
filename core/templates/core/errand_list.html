@@ -1,18 +1,55 @@
-<h1>My todo app</h1>
+{% extends 'core/main.html' %}
+{% block content %}
 
+<div class="header">
+    <h2 class="greetings">Hello {{user}}</h2>
+    
+    <h3><a href="{% url 'logout' %}">Logout</a></h3>
+</div>
 <hr>
 
-<h2>Hello {{user}}</h2>
+<a class="create-task" href="{% url 'create' %}">Create new task</a>
 
-<h3><a href="{% url 'logout' %}">Logout</a></h3>
-<hr>
+<p>You have {{incompleted_tasks}} incomplete task{{ incompleted_tasks|pluralize:'s' }}</p>
 
-<a href="{% url 'create' %}">Create new task</a>
-<table>
+
+<div class="tasks-table">
+    
+    {% for task in errands %}
+
+        {% if task.completed %}
+            <div class="task">
+                <h3 class="task-title"><s>{{task.title}}</s></h3>
+                <div class="link-buttons">
+                    <a class="detail-task" href="{% url 'detail' task.id %}">Details</a>
+                    <a class="update-task" href="{% url 'update' task.id %}">Change</a>
+                    <a class="delete-task" href="{% url 'delete' task.id %}">&#10008;</a>
+                </div>
+            </div>
+        {% else %}
+            <div class="task">
+                <h3 class="task-title">{{task.title}}</h3>
+                <div class="link-buttons">
+                    <a class="detail-task" href="{% url 'detail' task.id %}">Details</a>
+                    <a class="update-task" href="{% url 'update' task.id %}">Change</a>
+                    <a class="delete-task" href="{% url 'delete' task.id %}">&#10008;</a>
+                </div>
+            </div>
+        {% endif %}
+        
+    {% empty %}
+        <h3>No items in list</h3>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+
+<!-- <table>
     <tr>
         <th>Item</th>
+        {% for task in errands %}
     </tr>
-    {% for task in errands %}
         <tr>
             <td>{{task.title}}</td>
             <td><a href="{% url 'detail' task.id %}">View</a></td>
@@ -22,4 +59,4 @@
     {% empty %}
         <h3>No items in list</h3>
     {% endfor %}
-</table> 
+</table>  -->

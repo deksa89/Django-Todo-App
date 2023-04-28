@@ -1,11 +1,12 @@
+# from django.views.generic.list import ListView
+# from django.views.generic.detail import DetailView
+# from django.views.generic.edit import CreateView, UpdateView, DeleteView
+# from django.urls import reverse_lazy 
+# from django.contrib.auth.views import LoginView
+# from django.views.generic.edit import FormView
+# from django.contrib.auth.forms import UserCreationForm
+
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic.list import ListView
-from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy 
-from django.contrib.auth.views import LoginView
-from django.views.generic.edit import FormView
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
@@ -71,9 +72,10 @@ from .forms import ErrandForm, LoginForm, RegisterForm
 def errand_list(request):
     if request.method == "GET":
         errands = Errand.objects.filter(created_by=request.user)  # filtriramo po polju unutar baze podataka i ispisujemo samo taskove koje je autentificirana osoba kreirala
-
+        incompleted_tasks = len(errands.filter(completed=False))  # broj ne dovrsenih taskova koje ispisujemo na errand_list.html
         return render(request, 'core/errand_list.html', {
-            'errands': errands
+            'errands': errands,
+            'incompleted_tasks': incompleted_tasks,
         })
 
 
@@ -81,7 +83,6 @@ def errand_list(request):
 def errand_detail(request, pk):
     if request.method == "GET":
         errand = Errand.objects.get(pk=pk)
-       
         return render(request, 'core/errand_detail.html', {
             'errand': errand
         })
@@ -91,13 +92,11 @@ def errand_detail(request, pk):
 def errand_create(request):
     if request.method == "POST":
         form = ErrandForm(request.POST)
-        
         if form.is_valid():
             errand = form.save(commit=False)
             errand.created_by = request.user
             errand.save()
             return redirect('errands') # ako zelis vidjeti kreirani task: return redirect('detail', pk=errand.pk), to ce nas preusmjeriti na detail url
-        
     else:
         form = ErrandForm()
     return render(request, 'core/errand_create.html', {
@@ -156,7 +155,6 @@ def errand_login(request):
     })
   
   
-#DODANO KAO FUNCTION-BASED VIEWS, U KLASNIMA JE LOGOUT U VIEWS.PY
 def errand_logout(request):
     logout(request)
     return redirect('errands')

@@ -1,13 +1,16 @@
-<h1>Login page</h1>
+{% extends 'core/main.html' %}
+{% block content %}
 
-<form method="POST">
+<h1 class="login-headline">Login page</h1>
+
+<form class="login-form" method="POST">
     {% csrf_token %}
     {{form.as_p}}
 
-    <input type="submit" value="Submit" />
+    <input class="login-btn" type="submit" value="Submit" />
 </form>
 
-<p>If you don't have an account: <a href="{% url 'register' %}">Register</a></p>
+<p class="login-to-register">If you don't have an account: <a href="{% url 'register' %}">Register</a></p>
 
-
+{% endblock %}
 

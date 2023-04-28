@@ -1,7 +1,12 @@
-<h1>About task detail</h1>
-<a href="{% url 'errands' %}">Go back</a>
+{% extends 'core/main.html' %}
+{% block content %}
 
-<p>Name of creator: {{errand.created_by}}</p>
-<p>Errand name: {{errand.title}}</p>
-<p>Created on: {{errand.created_time}}</p>
-<p>Is it completed: {{errand.completed}}</p>
+<h1 class="detail-headline">Task detail</h1>
+<a class="go-back-btn" href="{% url 'errands' %}">Go back</a>
+
+<p class="creator-name">Name of creator: {{errand.created_by}}</p>
+<p class="errand-name">Errand name: {{errand.title}}</p>
+<p class="date-created">Created on: {{errand.created_time}}</p>
+<p class="is-completed">Is it completed: {{errand.completed}}</p>
+
+{% endblock %}
