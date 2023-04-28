@@ -32,7 +32,7 @@
                 <div class="link-buttons">
                     <a class="detail-task" href="{% url 'detail' task.id %}">Details</a>
                     <a class="update-task" href="{% url 'update' task.id %}">Change</a>
-                    <a class="delete-task" href="{% url 'delete' task.id %}">&#10008;</a>
+                    <a class="delete-task" href="{% url 'delete' task.id %}" style="background-color: rgb(255, 22, 22);">&#10008;</a>
                 </div>
             </div>
         {% endif %}
@@ -43,20 +43,3 @@
 </div>
 
 {% endblock %}
-
-
-<!-- <table>
-    <tr>
-        <th>Item</th>
-        {% for task in errands %}
-    </tr>
-        <tr>
-            <td>{{task.title}}</td>
-            <td><a href="{% url 'detail' task.id %}">View</a></td>
-            <td><a href="{% url 'update' task.id %}">Update</a></td>
-            <td><a href="{% url 'delete' task.id %}">Delete</a></td>
-        </tr>
-    {% empty %}
-        <h3>No items in list</h3>
-    {% endfor %}
-</table>  -->

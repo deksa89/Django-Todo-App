@@ -120,21 +120,21 @@ def errand_update(request, pk):
     })
 
 
-# @login_required
-# def errand_delete(request, pk):  # OVA FUNKCIJA NAS NE VODI DO HTML STRANICE NA KOJOJ POTVRDUJEMO DA ZELIMO OBRISATI NEKI TASK VEC IH ODMAH BRISE
-#     errand = get_object_or_404(Errand, pk=pk)
-#     errand.delete()
-#     return redirect('errands')
-
 @login_required
-def errand_delete(request, pk):
+def errand_delete(request, pk):  # OVA FUNKCIJA NAS NE VODI DO HTML STRANICE NA KOJOJ POTVRDUJEMO DA ZELIMO OBRISATI NEKI TASK VEC IH ODMAH BRISE
     errand = get_object_or_404(Errand, pk=pk)
-    if request.method == "POST":   
-        errand.delete()
-        return redirect('errands')
-    return render(request, 'core/errand_delete.html', {
-        'errand': errand
-    })
+    errand.delete()
+    return redirect('errands')
+
+# @login_required
+# def errand_delete(request, pk):
+#     errand = get_object_or_404(Errand, pk=pk)
+#     if request.method == "POST":   
+#         errand.delete()
+#         return redirect('errands')
+#     return render(request, 'core/errand_delete.html', {
+#         'errand': errand
+#     })
 
 
 def errand_login(request):
