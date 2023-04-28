@@ -8,7 +8,7 @@
 </div>
 <hr>
 
-<a class="create-task" href="{% url 'create' %}">Create new task</a>
+<a class="create-task" href="{% url 'create' %}">Create New Task</a>
 
 <p>You have {{incompleted_tasks}} incomplete task{{ incompleted_tasks|pluralize:'s' }}</p>
 
@@ -23,7 +23,7 @@
                 <div class="link-buttons">
                     <a class="detail-task" href="{% url 'detail' task.id %}">Details</a>
                     <a class="update-task" href="{% url 'update' task.id %}">Change</a>
-                    <a class="delete-task" href="{% url 'delete' task.id %}">&#10008;</a>
+                    <a class="delete-task" href="{% url 'delete' task.id %}" style="background-color: rgb(255, 22, 22);">&#10008;</a>
                 </div>
             </div>
         {% else %}

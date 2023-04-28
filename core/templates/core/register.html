@@ -6,13 +6,12 @@
 
 <form class="register-form" method="POST">
     {% csrf_token %}
-    
     <label class="register-username">{{form.username.label}}</label>
     {{form.username}}
 
     <label class="register-password1">{{form.password1.label}}</label>
     {{form.password1}}
-
+    
     <label class="register-password2">{{form.password2.label}}</label>
     {{form.password2}}
 
