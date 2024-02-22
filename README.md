@@ -4,7 +4,7 @@ This is a simple todo app built with Django. It allows users to create, view, up
 
 
 ## Features
-
+- First you have to register, you can choose between registering by yourself or using your GitHub account
 - Users can create a new task by clicking the "Create New Task" button and entering a task description.
 - Users can view all tasks on the home page.
 - Users can task details such as: task owner, task title, time of creation and its completion status.
