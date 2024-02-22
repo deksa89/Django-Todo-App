@@ -17,17 +17,20 @@
     
 </form>
 
-<p class="login-to-register">If you don't have an account</p>
-<a href="{% url 'register' %}" class="github-btn">
-    REGISTER
-</a>
+<div class="container-bottom">
+    <p class="login-to-register">If you don't have an account</p>
+    <a href="{% url 'register' %}" class="github-btn">
+        REGISTER
+    </a>
+    
+    <br>
+    <p>Third-Party Authentification Providers</p>
+    
+    <a href="{% url 'github_login' %}" class="github-btn">
+        <span class="github-icon"></span>
+        GitHub
+    </a>
 
-<br>
-<p>Third-Party Authentification Providers</p>
-
-<a href="{% url 'github_login' %}" class="github-btn">
-    <span class="github-icon"></span>
-    GitHub
-</a>
+</div>
 {% endblock %}
 
