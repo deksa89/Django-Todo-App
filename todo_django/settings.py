@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("SECRET_KEY")
+SECRET_KEY = config('SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -34,14 +34,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'core',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    
-    'core.apps.CoreConfig',
+    'django.contrib.staticfiles'
 ]
 
 MIDDLEWARE = [
@@ -53,6 +52,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+# GitHub OAuth Config
+GITHUB_CLIENT_ID = config('GITHUB_CLIENT_ID')
+GITHUB_CLIENT_SECRET = config('GITHUB_CLIENT_SECRET')
+GITHUB_OAUTH_URL = 'https://github.com/login/oauth/authorize'
+GITHUB_TOKEN_URL = 'https://github.com/login/oauth/access_token'
+GITHUB_API_URL = 'https://api.github.com/user'
 
 ROOT_URLCONF = 'todo_django.urls'
 
@@ -78,22 +85,22 @@ WSGI_APPLICATION = 'todo_django.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'todo_app_db',
-        'USER': 'dean',
-        'PASSWORD': config("PASSWORD"),
-
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'mydb',
+#         'USER': 'dean',
+#         'PASSWORD': 'some_password',
+
+#     }
+# }
 
 
 
@@ -133,7 +140,7 @@ LOGIN_URL = 'login' # SAMO UPISES IME KOJE SI DAO U VIEWS.LOGIN BEZ PUNOG IMENA 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

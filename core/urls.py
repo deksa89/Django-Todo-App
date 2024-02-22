@@ -15,6 +15,8 @@ urlpatterns = [
     path('login/', views.errand_login, name="login"),
     path('logout/', views.errand_logout, name="logout"),
     path('register/', views.errand_register, name="register"),
+    path('github/login/', views.github_login, name='github_login'),
+    path('callback/', views.github_callback, name='github_callback'),
 ]
 
 

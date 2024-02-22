@@ -9,8 +9,8 @@ class Errand(models.Model):
     created_time = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return self.title
-    
+        return f"{self.title}"
+        
     class Meta:
         ordering = ['completed']
     

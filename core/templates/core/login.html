@@ -6,11 +6,28 @@
 <form class="login-form" method="POST">
     {% csrf_token %}
     {{form.as_p}}
-
+    {% if messages %}
+        <ul class="error">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
     <input class="login-btn" type="submit" value="Submit" />
+    
 </form>
 
-<p class="login-to-register">If you don't have an account: <a href="{% url 'register' %}">Register</a></p>
+<p class="login-to-register">If you don't have an account</p>
+<a href="{% url 'register' %}" class="github-btn">
+    REGISTER
+</a>
 
+<br>
+<p>Third-Party Authentification Providers</p>
+
+<a href="{% url 'github_login' %}" class="github-btn">
+    <span class="github-icon"></span>
+    GitHub
+</a>
 {% endblock %}
 
