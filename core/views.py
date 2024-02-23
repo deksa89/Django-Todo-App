@@ -14,8 +14,10 @@ from django.contrib import messages
 # github sso settings
 from django.conf import settings
 import requests
-from django.http import JsonResponse
 from django.contrib.auth.models import User
+
+# google auth
+from django.urls import reverse
 
 from .models import Errand
 from .forms import ErrandForm, LoginForm, RegisterForm
@@ -127,8 +129,66 @@ def github_callback(request):
             last_name = last_name,
         )
     
-    login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+    login(request, user)
     
+    # redirect to the homepage or dashboard after login
+    return redirect('/')
+
+
+def google_login(request):
+    scope = "email profile"
+    redirect_uri = 'http://127.0.0.1:8000/accounts/google/login/callback/'   
+    auth_url = f"https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id={settings.GOOGLE_CLIENT_ID}&redirect_uri={redirect_uri}&scope={scope}&access_type=offline&prompt=consent"
+
+    return redirect(auth_url)
+
+def google_callback(request):
+    code = request.GET.get('code')
+
+    # exchange the code for an access token
+    token_url = "https://oauth2.googleapis.com/token"
+    token_data = {
+        'code': code,
+        'client_id': settings.GOOGLE_CLIENT_ID,
+        'client_secret': settings.GOOGLE_CLIENT_SECRET,
+        'redirect_uri': 'http://127.0.0.1:8000/accounts/google/login/callback/',
+        'grant_type': 'authorization_code',
+    }
+    
+    token_response = requests.post(token_url, data=token_data)
+    
+    # it will raise an HTTPError if the HTTP request returned an unsuccessful status code
+    token_response.raise_for_status()  
+    token = token_response.json().get('access_token')
+
+    # use the access token to access the Google API
+    user_info_url = "https://www.googleapis.com/oauth2/v1/userinfo"
+    user_info_r = requests.get(user_info_url, headers={'Authorization': f'Bearer {token}'})
+    user_info = user_info_r.json()
+    
+    first_name = user_info['given_name']
+    last_name = user_info['family_name']
+    full_name = first_name + last_name[:2]
+    
+    user = User.objects.filter(username=full_name).first()
+
+    if user:
+        # user exists, you could update user details here
+        user.first_name = user_info['given_name']
+        user.last_name = user_info['family_name']
+        user.email = user_info['email']
+        user.save()
+    else:
+        # Create a new user if one does not exist
+        user = User.objects.create_user(
+            username=full_name,
+            first_name = user_info['family_name'],
+            last_name = user_info['given_name'],
+            email = user_info['email'],
+        )
+        
+    login(request, user)
+
     # redirect to the homepage or dashboard after login
     return redirect('/')
 

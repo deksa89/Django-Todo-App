@@ -13,23 +13,31 @@
             {% endfor %}
         </ul>
     {% endif %}
-    <input class="login-btn" type="submit" value="Submit" />
+    <input class="login-btn" type="submit" value="Log In" />
     
 </form>
 
 <div class="container-bottom">
-    <p class="login-to-register">If you don't have an account</p>
-    <a href="{% url 'register' %}" class="github-btn">
-        REGISTER
-    </a>
+    <div class="register-section">
+        <p class="login-to-register">If you don't have an account: </p>
+        <a href="{% url 'register' %}" class="register-btn">
+            Register
+        </a>
+    </div>
     
     <br>
     <p>Third-Party Authentification Providers</p>
     
-    <a href="{% url 'github_login' %}" class="github-btn">
-        <span class="github-icon"></span>
-        GitHub
-    </a>
+    <div class="auth-buttons">
+        <a href="{% url 'github_login' %}" class="github-btn">
+            <span class="github-icon"></span>
+            GitHub
+        </a>
+    
+        <a href="{% url 'google_login' %}" class="github-btn">
+            Google
+        </a>
+    </div>
 
 </div>
 {% endblock %}
