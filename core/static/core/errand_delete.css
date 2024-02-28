@@ -1,0 +1,38 @@
+p {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.delete-headline {
+    font-size: 2em;
+    margin-top: 1em;
+}
+  
+.go-back-delete {
+    color: blue;
+    text-decoration: none;
+    margin-bottom: 1em;
+    display: block;
+}
+
+.delete-title {
+    font-weight: bold;
+}
+
+.delete-form {
+    display: inline-block;
+}
+
+.delete-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+  
+  .delete-btn:hover {
+    background-color: maroon;
+}
+

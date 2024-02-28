@@ -1,0 +1,33 @@
+p {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.detail-headline {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.go-back-btn {
+    display: inline-block;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.go-back-btn:hover {
+    text-decoration: underline;
+}
+
+.creator-name {
+    font-weight: bold;
+}
+
+.date-created {
+    font-style: italic;
+}
+
+.is-completed {
+    font-weight: bold;
+}

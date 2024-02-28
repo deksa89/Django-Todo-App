@@ -1,0 +1,79 @@
+.create-task {
+    display: block;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 2px 2px #ccc;
+    transition: all 0.3s ease;
+}
+
+
+.create-task:hover {
+    background-color: #0062cc;
+    box-shadow: 3px 3px #ccc;
+}
+
+p {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.create-headline {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.go-back-create {
+    display: inline-block;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.go-back-create:hover {
+    text-decoration: underline;
+}
+
+.create-form {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.create-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.create-form input[type="text"],
+.create-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.create-form input[type="submit"] {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.create-form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+

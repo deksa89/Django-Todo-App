@@ -1,4 +1,7 @@
 {% extends 'core/main.html' %}
+{% load static %}
+
+{% block site_css %}<link rel="stylesheet" href="{% static 'core/errand_create.css' %}">{% endblock %}
 {% block content %}
 
 <h1 class="create-headline">Create errand</h1>

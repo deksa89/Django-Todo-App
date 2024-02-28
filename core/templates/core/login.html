@@ -1,4 +1,7 @@
 {% extends 'core/main.html' %}
+{% load static %}
+
+{% block site_css %}<link rel="stylesheet" href="{% static 'core/login.css' %}">{% endblock %}
 {% block content %}
 
 <h1 class="login-headline">Login page</h1>
